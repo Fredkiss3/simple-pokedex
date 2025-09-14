@@ -4,14 +4,23 @@
 "use client";
 
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import * as React from "react";
+import { useDebouncedCallback } from "use-debounce";
 
 export function SearchInput() {
 	const router = useRouter();
 	const sParams = useSearchParams();
 	const path = usePathname();
 
+	const formRef = React.useRef<React.ComponentRef<"form">>(null);
+
+	const submitCallback = useDebouncedCallback(() => {
+		formRef.current.requestSubmit();
+	}, 300);
+
 	return (
 		<form
+			ref={formRef}
 			onSubmit={(e) => {
 				e.preventDefault();
 				router.push(
@@ -70,11 +79,13 @@ export function SearchInput() {
 					type="search"
 					name="search"
 					id="search"
-					key={sParams.toString()}
 					autoFocus
 					placeholder="ex: pikachu"
 					className="flex items-center w-full max-w-72 text-left space-x-3 px-4 h-12 bg-white ring-1 ring-slate-900/10 hover:ring-slate-300 focus:outline-none focus:ring-2 focus:ring-sky-500 shadow-sm rounded-lg text-slate-400 dark:bg-slate-800 dark:ring-0 dark:text-slate-300 dark:highlight-white/5 dark:hover:bg-slate-700"
 					defaultValue={sParams.get("search") ?? ""}
+					onChange={() => {
+						submitCallback();
+					}}
 				/>
 			</fieldset>
 

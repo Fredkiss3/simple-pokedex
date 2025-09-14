@@ -1,3 +1,4 @@
+/** biome-ignore-all lint/performance/noImgElement: we don't want image optimization */
 import * as React from "react";
 import { SearchInput } from "./search-input";
 import { sleep } from "./utils";
@@ -7,26 +8,22 @@ type Pokemon = {
 	id: number;
 };
 
-export async function generateMetadata(
-    props: {
-        searchParams?: Promise<Record<string, string | undefined>>;
-    }
-) {
+export async function generateMetadata(props: {
+	searchParams?: Promise<Record<string, string | undefined>>;
+}) {
 	const query = (await props.searchParams)?.search;
 	return {
 		title: query ? `Searching for ${query}` : "Search page",
 	};
 }
-export default async function Page(
-    props: {
-        searchParams?: Promise<Record<string, string | undefined>>;
-    }
-) {
+export default async function Page(props: {
+	searchParams?: Promise<Record<string, string | undefined>>;
+}) {
 	const keyString = `search=${(await props.searchParams)?.search}&wait=${(await props.searchParams)?.wait}`;
 	return (
-        <section className="flex flex-col">
-            <SearchInput />
-            {(await props.searchParams)?.search ? (
+		<section className="flex flex-col">
+			<SearchInput />
+			{(await props.searchParams)?.search ? (
 				<React.Suspense
 					key={keyString}
 					fallback={
@@ -50,8 +47,8 @@ export default async function Page(
 					<hr className="h-px w-20 text-gray-100/20" />
 				</div>
 			)}
-        </section>
-    );
+		</section>
+	);
 }
 
 async function PokemonList(props: { name: string; wait: boolean }) {
