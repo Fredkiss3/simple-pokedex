@@ -3,7 +3,6 @@
 import { eq } from "drizzle-orm";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import * as React from "react";
 import { db } from "~/db";
 import { teams } from "~/db/schema";
 import { CopyLinkButton } from "./copy-link-button";
@@ -53,10 +52,10 @@ export default async function TeamPage({
         ))}
       </ul>
 
-      <div className="flex justify-center pt-4 pb-8">
+      <div className="flex justify-center items-center pt-4 pb-8 gap-4">
         <Link
           href="/"
-          className="bg-sky-600 hover:bg-sky-500 text-white font-semibold px-6 py-3 rounded-lg"
+          className="bg-zinc-800 hover:bg-zinc-700 text-white font-semibold px-6 py-3 rounded-lg"
         >
           Build your own team
         </Link>

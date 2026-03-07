@@ -15,7 +15,7 @@ export function CopyLinkButton() {
   return (
     <button
       onClick={copy}
-      className="flex items-center gap-2 bg-zinc-800 hover:bg-zinc-700 text-white text-sm font-medium px-4 py-2 rounded-lg transition-colors"
+      className="flex items-center gap-2 bg-sky-600 hover:bg-sky-500 text-white text-sm font-medium px-4 py-3 rounded-lg transition-colors"
     >
       {copied ? (
         <>
