@@ -5,7 +5,8 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import * as React from "react";
 import { db } from "~/db";
-import { teams } from "~/schema";
+import { teams } from "~/db/schema";
+import { CopyLinkButton } from "./copy-link-button";
 
 type PokemonDetail = { id: number; name: string };
 
@@ -31,14 +32,17 @@ export default async function TeamPage({
 
   return (
     <section className="flex flex-col gap-8">
-      <div>
-        <h1 className="text-2xl font-bold">Shared Team</h1>
-        <p className="text-gray-400 text-sm mt-1">
-          Slug:{" "}
-          <code className="font-mono bg-zinc-800 px-1.5 py-0.5 rounded">
-            {slug}
-          </code>
-        </p>
+      <div className="flex items-center justify-between gap-4">
+        <div>
+          <h1 className="text-2xl font-bold">Shared Team</h1>
+          <p className="text-gray-400 text-sm mt-1">
+            Slug:{" "}
+            <code className="font-mono bg-zinc-800 px-1.5 py-0.5 rounded">
+              {slug}
+            </code>
+          </p>
+        </div>
+        <CopyLinkButton />
       </div>
 
       <ul className="grid sm:grid-cols-2 md:grid-cols-3 gap-4 lg:gap-6">

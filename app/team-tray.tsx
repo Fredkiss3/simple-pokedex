@@ -14,21 +14,17 @@ export function TeamTray() {
   if (team.length === 0) return null;
 
   async function saveTeam() {
-    try {
-      const res = await fetch("/api/teams", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          pokemon_ids: team.map((p) => p.id),
-          pokemon_names: team.map((p) => p.name),
-        })
-      });
-      const { url } = await res.json();
-      clearTeam();
-      router.push(url);
-    } finally {
-      // setSaving(false);
-    }
+    const res = await fetch("/api/teams", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        pokemon_ids: team.map((p) => p.id),
+        pokemon_names: team.map((p) => p.name)
+      })
+    });
+    const { url } = await res.json();
+    clearTeam();
+    router.push(url);
   }
 
   return (
@@ -44,7 +40,7 @@ export function TeamTray() {
               className="flex items-center gap-1.5 bg-zinc-800 rounded-full px-3 py-1 text-sm text-white"
             >
               <img
-                src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${p.id}.png`}
+                src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${p.id}.png`}
                 alt={p.name}
                 width={24}
                 height={24}

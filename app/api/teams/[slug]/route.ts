@@ -1,7 +1,7 @@
 import { eq } from "drizzle-orm";
 import { NextResponse } from "next/server";
 import { db } from "~/db";
-import { teams } from "~/schema";
+import { teams } from "~/db/schema";
 
 export async function GET(
 	_request: Request,

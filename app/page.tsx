@@ -2,7 +2,6 @@
 import * as React from "react";
 import { AddToTeamButton } from "./add-to-team-button";
 import { SearchInput } from "./search-input";
-import { sleep } from "./utils";
 
 type Pokemon = {
   name: string;
@@ -36,10 +35,7 @@ export default async function Page(props: {
             </ul>
           }
         >
-          <PokemonList
-            name={(await props.searchParams)?.search}
-            wait={(await props.searchParams)?.wait === "on"}
-          />
+          <PokemonList name={(await props.searchParams)?.search} />
         </React.Suspense>
       ) : (
         <div className="col-span-full py-8 px-4 flex items-center gap-8 justify-center">
@@ -52,10 +48,7 @@ export default async function Page(props: {
   );
 }
 
-async function PokemonList(props: { name: string; wait: boolean }) {
-  if (props.wait) {
-    await sleep(2000);
-  }
+async function PokemonList(props: { name: string }) {
   const pokemons = await fetch(`https://graphql.pokeapi.co/v1beta2`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },

@@ -1,8 +1,8 @@
 import { eq } from "drizzle-orm";
 import { NextResponse } from "next/server";
 import { z } from "zod";
-import { db } from "../../db";
-import { teams } from "../../schema";
+import { db } from "~/db";
+import { teams } from "~/db/schema";
 
 const createTeamSchema = z
 	.object({
