@@ -1,5 +1,6 @@
 /** biome-ignore-all lint/performance/noImgElement: we don't want image optimization */
 import * as React from "react";
+import { AddToTeamButton } from "./add-to-team-button";
 import { SearchInput } from "./search-input";
 import { sleep } from "./utils";
 
@@ -148,6 +149,8 @@ function PokemonCard({ pokemon }: { pokemon: Pokemon }) {
         <dt>Name: </dt>
         <dd>{pokemon.name}</dd>
       </div>
+
+      <AddToTeamButton pokemon={pokemon} />
     </dl>
   );
 }
