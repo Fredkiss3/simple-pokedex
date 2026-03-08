@@ -27,7 +27,7 @@ export default function RootLayout({ children }) {
           <TeamTray />
         </TeamProvider>
 
-        <TailwindIndicator />
+        {process.env.NODE_ENV === "development" && <TailwindIndicator />}
       </body>
     </html>
   );
