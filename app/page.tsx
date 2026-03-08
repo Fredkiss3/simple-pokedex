@@ -1,6 +1,6 @@
 import * as React from "react";
-import { PokemonCard } from "./pokemon-card";
 import type { Pokemon } from "./pokemon-card";
+import { PokemonCard, PokemonCardSkeleton } from "./pokemon-card";
 import { SearchInput } from "./search-input";
 
 export async function generateMetadata(props: {
@@ -74,7 +74,7 @@ async function PokemonList(props: { name: string }) {
 
   return (
     <div
-      className={`grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 lg:gap-6 py-4 pb-52 place-items-stretch`}
+      className={`grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 lg:gap-6 py-4 pb-52 place-items-stretch`}
     >
       {pokemons.map((p) => (
         <li className="list-none" key={p.id}>
@@ -89,17 +89,3 @@ async function PokemonList(props: { name: string }) {
     </div>
   );
 }
-
-function PokemonCardSkeleton() {
-  return (
-    <div className="border rounded-md bg-gray-600 border-gray-200 font-normal p-2 flex flex-col gap-4">
-      <span className="sr-only">Loading pokemon...</span>
-      <div className="flex gap-2 bg-slate-400 h-4 rounded animate-pulse" />
-
-      <div className="h-[200px] w-full bg-slate-400 rounded animate-pulse" />
-
-      <div className="flex gap-2 bg-slate-400 h-4 rounded animate-pulse" />
-    </div>
-  );
-}
-

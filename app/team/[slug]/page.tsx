@@ -1,9 +1,10 @@
 import { eq } from "drizzle-orm";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import * as React from "react";
 import { db } from "~/db";
-import { PokemonCard } from "~/pokemon-card";
 import { teams } from "~/db/schema";
+import { PokemonCard, PokemonCardSkeleton } from "~/pokemon-card";
 import { CopyLinkButton } from "./copy-link-button";
 
 export default async function TeamPage({
@@ -41,13 +42,24 @@ export default async function TeamPage({
         <CopyLinkButton />
       </div>
 
-      <ul className="grid sm:grid-cols-2 md:grid-cols-3 gap-4 lg:gap-6">
-        {pokemons.map((p) => (
-          <li key={p.id} className="list-none">
-            <PokemonCard pokemon={p} />
-          </li>
-        ))}
-      </ul>
+      <React.Suspense
+        fallback={
+          <ul className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 lg:gap-6 py-4 pb-52 place-items-stretch">
+            <PokemonCardSkeleton />
+            <PokemonCardSkeleton />
+            <PokemonCardSkeleton />
+            <PokemonCardSkeleton />
+          </ul>
+        }
+      >
+        <ul className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 lg:gap-6">
+          {pokemons.map((p) => (
+            <li key={p.id} className="list-none">
+              <PokemonCard pokemon={p} />
+            </li>
+          ))}
+        </ul>
+      </React.Suspense>
 
       <div className="flex justify-center items-center pt-4 pb-8 gap-4">
         <Link
@@ -60,4 +72,3 @@ export default async function TeamPage({
     </section>
   );
 }
-
